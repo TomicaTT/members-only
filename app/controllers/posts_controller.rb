@@ -16,10 +16,16 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
-  # before filter
-  def signed_in_user
-    unless signed_in?
-      redirect_to login_url
+  private
+
+    def post_params
+      params.require(:post).permit(:title, :body)
     end
-  end
+
+    # before filter/
+    def signed_in_user
+      unless signed_in?
+        redirect_to signin_url
+      end
+    end
 end
