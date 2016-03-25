@@ -5,6 +5,13 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def create
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.save
+    redirect_to root_path
+  end
+
   # before filter
   def signed_in_user
     unless signed_in?
